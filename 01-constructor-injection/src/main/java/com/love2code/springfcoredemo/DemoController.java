@@ -14,18 +14,10 @@ public class DemoController {
     // A private field to hold the reference of the Coach object, following the principle of Dependency Injection.
     private Coach myCoach;
 
-    /* We can call the setter what ever we want instead of setCoach as can be seen below ( doSomeStuff )
     @Autowired
     public void setCoach (Coach theCoach) { // Setter method for dependency injection.
         myCoach = theCoach;
     }
-    */
-
-    @Autowired
-    public void doSomeStuff (Coach theCoach) { // Setter method for dependency injection.
-        myCoach = theCoach;
-    }
-
 
     // Maps the HTTP GET request with the URL "/dailyworkout" to this method.
     // When a user accesses the "/dailyworkout" endpoint, this method gets executed.
