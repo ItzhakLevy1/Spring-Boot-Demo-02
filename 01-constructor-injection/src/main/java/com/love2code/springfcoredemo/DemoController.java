@@ -2,6 +2,7 @@
 package com.love2code.springfcoredemo;
 
 // Import necessary Spring annotations and classes
+import com.luv2code.util.Coach;
 import org.springframework.beans.factory.annotation.Autowired;   // Used for dependency injection.
 import org.springframework.web.bind.annotation.GetMapping;     // Maps HTTP GET requests to specific handler methods.
 import org.springframework.web.bind.annotation.RestController; // Marks the class as a REST controller.
