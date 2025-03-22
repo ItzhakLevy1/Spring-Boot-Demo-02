@@ -1,6 +1,5 @@
-package com.luv2code.util;
+package com.love2code.springfcoredemo;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 @Component  // Marks this class as a Spring bean and makes it available for dependency injection
