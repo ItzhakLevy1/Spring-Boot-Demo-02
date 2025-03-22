@@ -11,13 +11,9 @@ import org.springframework.web.bind.annotation.RestController; // Marks the clas
 @RestController
 public class DemoController {
 
-    // A private field to hold the reference of the Coach object, following the principle of Dependency Injection.
-    private Coach myCoach;
-
     @Autowired
-    public void setCoach (Coach theCoach) { // Setter method for dependency injection.
-        myCoach = theCoach;
-    }
+    private Coach myCoach;  // This is a field injection. The Coach object is injected into this field. no need for setters of constructors.
+
 
     // Maps the HTTP GET request with the URL "/dailyworkout" to this method.
     // When a user accesses the "/dailyworkout" endpoint, this method gets executed.
