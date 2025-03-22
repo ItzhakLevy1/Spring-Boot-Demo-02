@@ -17,10 +17,7 @@ public class DemoController {
     // Constructor for DemoController - Spring will automatically call this constructor to inject dependencies.
     // The @Autowired annotation tells Spring to inject an implementation of the Coach interface.
     @Autowired
-//    public DemoController (@Qualifier("baseballCoach") Coach theCoach) {
-//    public DemoController (@Qualifier("tennisCoach") Coach theCoach) {
-//    public DemoController (@Qualifier("trackCoach") Coach theCoach) {
-    public DemoController (@Qualifier("cricketCoach") Coach theCoach) { // Using the @Qualifier annotation to specify the bean to be injected.
+    public DemoController (Coach theCoach) { // Using the @Qualifier annotation to specify the bean to be injected.
         myCoach = theCoach;  // Assigning the injected Coach object to the class-level variable 'myCoach'
     }
 
