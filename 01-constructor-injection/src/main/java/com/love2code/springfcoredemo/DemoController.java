@@ -14,12 +14,18 @@ public class DemoController {
     // A private field to hold the reference of the Coach object, following the principle of Dependency Injection.
     private Coach myCoach;
 
-    // Constructor for DemoController - Spring will automatically call this constructor to inject dependencies.
-    // The @Autowired annotation tells Spring to inject an implementation of the Coach interface.
+    /* We can call the setter what ever we want instead of setCoach as can be seen below ( doSomeStuff )
     @Autowired
-    public DemoController(Coach theCoach) { // Accepting a Coach object as a dependency
-        myCoach = theCoach;  // Assigning the injected Coach object to the class-level variable 'myCoach'
+    public void setCoach (Coach theCoach) { // Setter method for dependency injection.
+        myCoach = theCoach;
     }
+    */
+
+    @Autowired
+    public void doSomeStuff (Coach theCoach) { // Setter method for dependency injection.
+        myCoach = theCoach;
+    }
+
 
     // Maps the HTTP GET request with the URL "/dailyworkout" to this method.
     // When a user accesses the "/dailyworkout" endpoint, this method gets executed.
