@@ -12,7 +12,7 @@ public class DemoController {
 
 
     @Autowired
-    public DemoController (@Qualifier("cricketCoach") Coach theCoach) {
+    public DemoController (@Qualifier("aquatic") Coach theCoach) {    // Injecting the custom aquatic bean ID
         System.out.println("In constructor: " + getClass().getSimpleName());
         myCoach = theCoach;
     }
