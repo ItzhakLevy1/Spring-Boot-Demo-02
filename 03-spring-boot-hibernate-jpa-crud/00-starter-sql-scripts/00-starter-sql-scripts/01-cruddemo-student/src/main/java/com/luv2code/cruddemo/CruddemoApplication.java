@@ -37,8 +37,8 @@ public class CruddemoApplication {
 		studentDAO.save(tempStudent3);
 	}
 
-	// To set the starting point for the auto-incrementing primary key in MySQL, we can use the following SQL command:
-	// ALTER TABLE student_tracker.student AUTO_INCREMENT=3000
+	// To clear the database table before running the application, you can use the following SQL command:
+	// TRUNCATE student_tracker.student;
 
 	private void createStudent(StudentDAO studentDAO) {
 
