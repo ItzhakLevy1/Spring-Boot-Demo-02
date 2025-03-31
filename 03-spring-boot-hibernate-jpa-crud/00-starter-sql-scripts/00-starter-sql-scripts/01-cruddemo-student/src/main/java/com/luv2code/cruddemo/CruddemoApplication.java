@@ -7,6 +7,8 @@ import org.springframework.boot.SpringApplication;	// SpringApplication is a cla
 import org.springframework.boot.autoconfigure.SpringBootApplication;	// SpringBootApplication is a convenience annotation that adds all of the following: @Configuration, @EnableAutoConfiguration, and @ComponentScan
 import org.springframework.context.annotation.Bean;	// Bean is used to indicate that a method produces a bean to be managed by the Spring container
 
+import java.util.List;
+
 @SpringBootApplication
 public class CruddemoApplication {
 
@@ -17,8 +19,21 @@ public class CruddemoApplication {
 	@Bean
 	public CommandLineRunner commandLineRunner(StudentDAO studentDAO) {	// Inject the StudentDAO bean
 		return runner -> {	// Lambda expression for the CommandLineRunner interface
-			readStudent(studentDAO);	// Call the readStudent method	
+
+			//createMultipleStudents(studentDAO);
+			queryForStudents(studentDAO);	// Call the queryStudent method to read a student
 		};
+	}
+
+	private void queryForStudents(StudentDAO studentDAO) {
+
+		// Get a list of students
+		List<Student> theStudents = studentDAO.findAll();	// Call the findAll method from the StudentDAO interface
+
+		// Display the list of students
+		for (Student tempStudent : theStudents) {	// Loop through the list of students
+			System.out.println(tempStudent);	// Print each student
+		}
 	}
 
 	private void readStudent(StudentDAO studentDAO) {
