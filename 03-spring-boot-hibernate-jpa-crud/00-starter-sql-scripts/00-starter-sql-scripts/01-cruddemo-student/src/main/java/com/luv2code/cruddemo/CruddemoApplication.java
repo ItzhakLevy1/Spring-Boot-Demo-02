@@ -22,8 +22,21 @@ public class CruddemoApplication {
 
 			//readStudent(studentDAO);	// Call the readStudent method to create and read a student
 			//createMultipleStudents(studentDAO);
-			queryForStudents(studentDAO);	// Call the queryStudent method to read a student
+			//queryForStudents(studentDAO);	// Call the queryStudent method to read a student
+
+			queryForStudentsByLastName(studentDAO);	// Call the queryForStudentsByLastName method to read a student by last name
 		};
+	}
+
+	private void queryForStudentsByLastName(StudentDAO studentDAO) {
+
+		// Get a list of students
+		List<Student> theStudents = studentDAO.findByLastName("Duck");	// Call the findByLastName method from the StudentDAO interface
+
+		// Display the list of students
+		for (Student tempStudent : theStudents) {	// Loop through the list of students
+			System.out.println(tempStudent);	// Print each student
+		}
 	}
 
 	private void queryForStudents(StudentDAO studentDAO) {

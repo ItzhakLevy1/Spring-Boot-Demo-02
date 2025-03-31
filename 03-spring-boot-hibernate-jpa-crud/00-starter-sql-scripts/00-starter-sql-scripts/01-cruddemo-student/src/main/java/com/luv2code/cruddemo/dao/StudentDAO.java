@@ -11,4 +11,6 @@ public interface StudentDAO {
     Student findById(int id);   // Find the student object by id
 
     List<Student> findAll();    // Find all student objects in the database
+
+    List<Student> findByLastName(String theLastName); // Find all student objects by last name
 }

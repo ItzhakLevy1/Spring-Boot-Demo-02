@@ -38,4 +38,17 @@ public class StudentDAOImpl implements StudentDAO{
         TypedQuery<Student> theQuery = entityManager.createQuery("FROM Student order by lastName asc", Student.class);    // will sort the results by last name in an ascending order (a-z), use desc for descending order (z-a)
         return theQuery.getResultList(); // Execute the query and get the result list
     }
+
+    @Override
+    public List<Student> findByLastName(String theLastName) {
+
+        // Create query
+        TypedQuery<Student> theQuery = entityManager.createQuery("FROM Student WHERE lastName=:theData", Student.class);
+
+        // Set query parameter
+        theQuery.setParameter("theData", theLastName);
+
+        // Return the query results
+        return theQuery.getResultList();
+    }
 }
