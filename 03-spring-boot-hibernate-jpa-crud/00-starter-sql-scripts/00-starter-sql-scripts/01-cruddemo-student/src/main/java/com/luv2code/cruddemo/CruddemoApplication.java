@@ -20,6 +20,7 @@ public class CruddemoApplication {
 	public CommandLineRunner commandLineRunner(StudentDAO studentDAO) {	// Inject the StudentDAO bean
 		return runner -> {	// Lambda expression for the CommandLineRunner interface
 
+			//readStudent(studentDAO);	// Call the readStudent method to create and read a student
 			//createMultipleStudents(studentDAO);
 			queryForStudents(studentDAO);	// Call the queryStudent method to read a student
 		};
