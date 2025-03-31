@@ -12,16 +12,19 @@ public class StudentDAOImpl implements StudentDAO{
     // Define a field for EntityManager
     private EntityManager entityManager;
 
-    // Inject EntityManager using constructor injection
-    @Autowired  //
+    @Autowired  // Autowired is used for dependency constructor injection
     public StudentDAOImpl(EntityManager entityManager) {
         this.entityManager = entityManager;
     }
 
-    // Implement save method
-    @Override
+    @Override   // Save the student object to the database
     @Transactional  // Required since we are saving / updating / storing data to the database
     public void save(Student theStudent) {
         entityManager.persist(theStudent); // Persist the student object to the database
+    }
+
+    @Override
+    public Student findById(int id) {
+        return entityManager.find(Student.class, id); // Find the student object by id
     }
 }

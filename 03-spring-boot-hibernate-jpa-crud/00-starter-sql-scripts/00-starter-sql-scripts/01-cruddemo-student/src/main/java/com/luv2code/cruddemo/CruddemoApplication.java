@@ -1,11 +1,11 @@
 package com.luv2code.cruddemo;
 
-import com.luv2code.cruddemo.dao.StudentDAO;
-import com.luv2code.cruddemo.entity.Student;
+import com.luv2code.cruddemo.dao.StudentDAO;	// The StudentDAO interface is used to define the methods for accessing the student data
+import com.luv2code.cruddemo.entity.Student;	// The Student class is used to represent the student entity in the database
 import org.springframework.boot.CommandLineRunner;	// CommandLineRunner is a Spring Boot interface that can be used to execute code after the application has started
-import org.springframework.boot.SpringApplication;
-import org.springframework.boot.autoconfigure.SpringBootApplication;
-import org.springframework.context.annotation.Bean;
+import org.springframework.boot.SpringApplication;	// SpringApplication is a class that provides static methods to bootstrap a Spring application
+import org.springframework.boot.autoconfigure.SpringBootApplication;	// SpringBootApplication is a convenience annotation that adds all of the following: @Configuration, @EnableAutoConfiguration, and @ComponentScan
+import org.springframework.context.annotation.Bean;	// Bean is used to indicate that a method produces a bean to be managed by the Spring container
 
 @SpringBootApplication
 public class CruddemoApplication {
@@ -17,9 +17,30 @@ public class CruddemoApplication {
 	@Bean
 	public CommandLineRunner commandLineRunner(StudentDAO studentDAO) {	// Inject the StudentDAO bean
 		return runner -> {	// Lambda expression for the CommandLineRunner interface
-			// Create multiple student objects
-			createMultipleStudents(studentDAO);
+			readStudent(studentDAO);	// Call the readStudent method	
 		};
+	}
+
+	private void readStudent(StudentDAO studentDAO) {
+
+		// Create a student object
+		System.out.println("Creating new student object...");
+		Student tempStudent = new Student("Daffy", "Duck", "daffy@gmail.com");
+
+		// Save the student object
+		System.out.println("Saving the student...");
+		studentDAO.save(tempStudent);	// Call the save method from the StudentDAO interface
+
+		// Display the id of the saved student
+		int theId = tempStudent.getId();
+		System.out.println("Saved student. Generated id: " + theId);
+
+		// Retrieve the student based on the id: primary key
+		System.out.println("Retrieving student with id: " + theId);
+		Student myStudent = studentDAO.findById(theId);	// Call the findById method from the StudentDAO interface
+
+		// Display the student
+		System.out.println("Found the student: " + myStudent);
 	}
 
 	private void createMultipleStudents(StudentDAO studentDAO) {
@@ -36,9 +57,6 @@ public class CruddemoApplication {
 		studentDAO.save(tempStudent2);
 		studentDAO.save(tempStudent3);
 	}
-
-	// To clear the database table before running the application, you can use the following SQL command:
-	// TRUNCATE student_tracker.student;
 
 	private void createStudent(StudentDAO studentDAO) {
 

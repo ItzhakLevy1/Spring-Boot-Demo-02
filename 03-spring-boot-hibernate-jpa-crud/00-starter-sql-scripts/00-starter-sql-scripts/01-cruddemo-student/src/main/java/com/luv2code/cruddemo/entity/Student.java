@@ -1,9 +1,9 @@
 package com.luv2code.cruddemo.entity;
 
-import jakarta.persistence.*;
+import jakarta.persistence.*;   // The Jakarta Persistence API is a specification that provides a set of APIs for managing relational data in Java applications
 
 @Entity // Map this class to a database table
-@Table(name = "student")
+@Table(name = "student")    // Map this class to the student table in the database
 public class Student {
 
     // Define fields
@@ -21,11 +21,12 @@ public class Student {
     @Column(name = "email")    // Map this field to the column in the database table
     private String email;
 
-    // Define constructors
+    // No-arg constructor
     public Student() {
 
     }
 
+    // Constructor with parameters
     public  Student(String firstName, String lastName, String email) {
         this.firstName = firstName;
         this.lastName = lastName;
