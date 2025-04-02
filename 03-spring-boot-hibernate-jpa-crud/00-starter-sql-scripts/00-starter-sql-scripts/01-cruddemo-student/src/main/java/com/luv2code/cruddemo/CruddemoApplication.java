@@ -21,14 +21,18 @@ public class CruddemoApplication {
 		return runner -> {	// Lambda expression for the CommandLineRunner interface
 
 			//readStudent(studentDAO);	// Call the readStudent method to create and read a student
-			//createMultipleStudents(studentDAO);
+
+			createMultipleStudents(studentDAO);
+
 			//queryForStudents(studentDAO);	// Call the queryStudent method to read a student
 
 			//queryForStudentsByLastName(studentDAO);	// Call the queryForStudentsByLastName method to read a student by last name
+
 			//updateStudent(studentDAO);	// Call the updateStudent method to update a student
+
 			//deleteStudent(studentDAO);	// Call the deleteStudent method to delete a student
 
-			deleteAllStudents(studentDAO);	// Call the deleteAllStudents method to delete all students
+			//deleteAllStudents(studentDAO);	// Call the deleteAllStudents method to delete all students
 		};
 	}
 
