@@ -20,18 +20,18 @@ public class StudentDAOImpl implements StudentDAO{
         this.entityManager = entityManager;
     }
 
-    @Override   // Save the student object to the database
+    @Override   // Ensures correct method overriding from an interface or superclass
     @Transactional  // Required since we are saving / updating / storing data to the database
     public void save(Student theStudent) {
         entityManager.persist(theStudent); // Persist = save to the database
     }
 
-    @Override
+    @Override   // Ensures correct method overriding from an interface or superclass
     public Student findById(int id) {
         return entityManager.find(Student.class, id); // Find the student object by id
     }
 
-    @Override
+    @Override   // Ensures correct method overriding from an interface or superclass
     public List<Student> findAll() {    // Find all student objects in the database
 
         // Create a query to get all students
@@ -39,7 +39,7 @@ public class StudentDAOImpl implements StudentDAO{
         return theQuery.getResultList(); // Execute the query and get the result list
     }
 
-    @Override
+    @Override   // Ensures correct method overriding from an interface or superclass
     public List<Student> findByLastName(String theLastName) {
 
         // Create query
@@ -52,14 +52,14 @@ public class StudentDAOImpl implements StudentDAO{
         return theQuery.getResultList();
     }
 
-    @Override
+    @Override   // Ensures correct method overriding from an interface or superclass
     @Transactional
     public void update(Student theStudent) {
         entityManager.merge(theStudent); // Merge the student object with the existing object in the database
     }
 
-    @Override
-    @Transactional  // Required sinve we are interacting with the database
+    @Override   //  Ensures correct method overriding from an interface or superclass
+    @Transactional  // Required since we are interacting with the database
     public void delete(Integer id) {
 
         // Retrieve the student
@@ -67,5 +67,14 @@ public class StudentDAOImpl implements StudentDAO{
 
         // Delete the student
         entityManager.remove(theStudent);
+    }
+
+    @Override   //  Ensures correct method overriding from an interface or superclass
+    @Transactional  // Required since we are interacting with the database
+    public int deleteAll() {
+
+        // Execute the delete query and get the number of rows deleted
+        int numRowsDeleted = entityManager.createQuery("DELETE FROM Student").executeUpdate(); // executeUpdate() means we are modifying the database, not just reading it
+        return numRowsDeleted;
     }
 }
