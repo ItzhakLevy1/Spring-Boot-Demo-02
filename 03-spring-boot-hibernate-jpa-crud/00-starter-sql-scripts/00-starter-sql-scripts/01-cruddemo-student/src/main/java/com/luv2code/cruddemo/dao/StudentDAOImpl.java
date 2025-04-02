@@ -23,7 +23,7 @@ public class StudentDAOImpl implements StudentDAO{
     @Override   // Save the student object to the database
     @Transactional  // Required since we are saving / updating / storing data to the database
     public void save(Student theStudent) {
-        entityManager.persist(theStudent); // Persist the student object to the database
+        entityManager.persist(theStudent); // Persist = save to the database
     }
 
     @Override
@@ -50,5 +50,11 @@ public class StudentDAOImpl implements StudentDAO{
 
         // Return the query results
         return theQuery.getResultList();
+    }
+
+    @Override
+    @Transactional
+    public void update(Student theStudent) {
+        entityManager.merge(theStudent); // Merge the student object with the existing object in the database
     }
 }
