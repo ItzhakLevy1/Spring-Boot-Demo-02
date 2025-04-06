@@ -3,10 +3,9 @@ package com.luv2code.cruddemo.rest;
 import com.luv2code.cruddemo.entity.Student;
 import com.luv2code.cruddemo.entity.StudentPOJO;
 import jakarta.annotation.PostConstruct;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -36,6 +35,30 @@ public class StudentPOJORestController {
     // The full path would be: http://localhost:8080/api/students/0
     @GetMapping("/students/{studentId}")
     public StudentPOJO getStudent(@PathVariable int studentId) { // This method returns a student at the specified index, @PathVariable is used to extract the value from the URL
-        return theStudents.get(studentId); // Return the student at the specified index
+
+        // Check the studentId against the size of the list
+        if ((studentId >= theStudents.size()) || (studentId < 0)) { // If the studentId is out of bounds, meaning its index exceeds the size of the list or is less than 0
+            throw new StudentPOJONotFoundException("Student id not found - " + studentId); // Throw a custom exception
+        }
+
+        return theStudents.get(studentId); // Return the student at the specified index if there are no issues
+    }
+
+    // Add an exception handler using @ExceptionHandler
+    // This method will handle the StudentPOJONotFoundException
+    // http://localhost:8080/api/students/9999 this will throw an exception (anything greater than 2 or less than 0)
+
+    @ExceptionHandler // Indicates that this method will handle exceptions
+    public ResponseEntity<StudentPOJOErrorResponse> handleException(StudentPOJONotFoundException exc) { // <StudentPOJOErrorResponse> is the type of the response body, (StudentPOJONotFoundException exc) is the exception to be handled
+
+        // Create a StudentPOJOErrorResponse object
+        StudentPOJOErrorResponse error = new StudentPOJOErrorResponse();    // Create a new error response object
+
+        // Set the error details
+        error.setStatus(HttpStatus.NOT_FOUND.value()); // Set the status to NOT_FOUND (404)
+        error.setMessage(exc.getMessage()); // Set the message from the exception message
+        error.setTimeStamp(System.currentTimeMillis()); // Set the current timestamp
+
+        return new ResponseEntity<>(error, HttpStatus.NOT_FOUND); // Return the error response body with a NOT_FOUND status
     }
 }

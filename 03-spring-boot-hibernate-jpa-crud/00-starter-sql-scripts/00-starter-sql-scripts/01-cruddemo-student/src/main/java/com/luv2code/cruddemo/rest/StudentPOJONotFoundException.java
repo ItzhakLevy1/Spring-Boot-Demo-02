@@ -5,7 +5,7 @@ public class StudentPOJONotFoundException extends RuntimeException{
 //    Generate constructors from the super class to be used in the REST controller
 
     public StudentPOJONotFoundException(String message) {   // Constructor with message
-        super(message);
+        super(message); // Call the constructor of the superclass (RuntimeException) with the message
     }
 
     public StudentPOJONotFoundException(String message, Throwable cause) {  // Constructor with message and cause
