@@ -1,6 +1,6 @@
 package com.luv2code.cruddemo.rest;
 
-public class StudentErrorResponse {
+public class StudentPOJOErrorResponse {
 
     private int status;
 
@@ -9,11 +9,11 @@ public class StudentErrorResponse {
     private long timeStamp;
 
 
-    public StudentErrorResponse() {
+    public StudentPOJOErrorResponse() {
 
     }
 
-    public StudentErrorResponse(int status, String message, long timeStamp) {
+    public StudentPOJOErrorResponse(int status, String message, long timeStamp) {
         this.status = status;
         this.message = message;
         this.timeStamp = timeStamp;
