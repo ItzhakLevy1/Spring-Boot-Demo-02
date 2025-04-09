@@ -10,10 +10,11 @@ import java.util.List;
 @Service    // This annotation indicates that this class is a service component and tells Spring: “This class has business logic”
 public class EmployeeServiceImpl implements EmployeeService{
 
-    private EmployeeDAO employeeDAO;
+    private EmployeeDAO employeeDAO;    // DAO layer to handle data access logic
 
     @Autowired  // Constructor injection
     public EmployeeServiceImpl (EmployeeDAO theEmployeeDAO) {
+
         this.employeeDAO = theEmployeeDAO;
     }
 
