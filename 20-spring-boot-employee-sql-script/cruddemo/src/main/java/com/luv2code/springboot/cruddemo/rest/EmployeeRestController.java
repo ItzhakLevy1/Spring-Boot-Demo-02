@@ -18,7 +18,6 @@ public class EmployeeRestController {
     // Inject the Employee DAO using constructor injection
     @Autowired  // Constructor injection
     public EmployeeRestController(EmployeeService theEmployeeService) {
-
         this.employeeService = theEmployeeService;
     }
 
@@ -26,7 +25,6 @@ public class EmployeeRestController {
     // The whole URL will be http://localhost:8080/api/employees
     @GetMapping("/employees")   // This annotation maps HTTP GET requests to the findAll() method
     public List<Employee> findAll() {   // List<Employee> - The method will return a list of Employee objects : [Employee1, Employee2, Employee3, ...]
-
         return employeeService.findAll(); // Call the DAO method to get all employees
     }
 

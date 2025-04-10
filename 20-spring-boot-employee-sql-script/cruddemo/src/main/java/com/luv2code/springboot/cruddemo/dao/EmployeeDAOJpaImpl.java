@@ -6,6 +6,8 @@ import jakarta.persistence.TypedQuery;
 import org.springframework.stereotype.Repository;
 import java.util.List;
 
+// This class is responsible for data access logic and interacts with the database using JPA (Java Persistence API)
+// It is best practice to use the @Transactional annotation at the service layer to manage transactions and not here
 
 @Repository // Indicates that this class is a Data Access Object (DAO) and is responsible for interacting with the database
 public class EmployeeDAOJpaImpl implements EmployeeDAO {
@@ -34,5 +36,26 @@ public class EmployeeDAOJpaImpl implements EmployeeDAO {
 
         // Return the results
         return employees;
+    }
+
+    @Override
+    public Employee findById(int theId) {
+        // Find the employee by ID using the entity manager
+        Employee theEmployee = entityManager.find(Employee.class, theId);
+        return theEmployee;
+    }
+
+    @Override
+    public Employee save(Employee theEmployee) {
+        // Save the employee using the entity manager
+        Employee dbEmployee = entityManager.merge(theEmployee);
+        return dbEmployee;
+    }
+
+    @Override
+    public void deleteById(int theId) {
+        // Delete the employee by ID using the entity manager
+        Employee deletedEmployee = entityManager.find(Employee.class, theId);
+        entityManager.remove(deletedEmployee);
     }
 }
