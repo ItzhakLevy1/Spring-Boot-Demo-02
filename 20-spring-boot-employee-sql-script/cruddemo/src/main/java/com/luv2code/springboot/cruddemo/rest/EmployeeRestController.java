@@ -3,10 +3,8 @@ package com.luv2code.springboot.cruddemo.rest;
 import com.luv2code.springboot.cruddemo.entity.Employee;
 import com.luv2code.springboot.cruddemo.service.EmployeeService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+
 import java.util.List;
 
 
@@ -31,7 +29,7 @@ public class EmployeeRestController {
 
     // Add mapping for GET /employees/{employeeId}, The whole URL will be http://localhost:8080/api/employees/{employeeId}
     @GetMapping("/employees/{employeeId}") // This annotation maps HTTP GET requests to the findById() method
-    public Employee getEmployee(@PathVariable int employeeId) { // @PathVariable - This annotation binds the method parameter to the URI template variable
+    public Employee getEmployee(@PathVariable int employeeId) { // @PathVariable -  tells Spring to bind the URL path variable to the method parameter
         Employee theEmployee = employeeService.findById(employeeId); // Call the DAO method to get the employee by ID
 
         if (theEmployee == null) {
@@ -39,6 +37,25 @@ public class EmployeeRestController {
         }
 
         return theEmployee; // Return the employee object
+    }
+
+
+    // Add mapping for POST /employees - add a new employee, The whole URL will be http://localhost:8080/api/employees
+    /*
+    The post request will contain the employee object in JSON format :
+    {"firstName" : "Hector","lastName": "Perez","email" : "hector@luv2code.com"}
+    */
+    @PostMapping("/employees") // This annotation maps HTTP POST requests to the save() method
+    public Employee addEmployee(@RequestBody Employee theEmployee) { // @RequestBody - This annotation binds the HTTP request body ( JSON ) to the method parameter
+
+        // Just in case they pass an ID in JSON ... set id to 0
+        // This is to force a save of new item ... instead of update
+
+        theEmployee.setId(0); // Set the ID to 0 to indicate a new employee
+
+        Employee dbEmployee = employeeService.save(theEmployee); // Call the DAO method to save the employee
+
+        return dbEmployee; // Return the saved employee object
     }
 
 }
