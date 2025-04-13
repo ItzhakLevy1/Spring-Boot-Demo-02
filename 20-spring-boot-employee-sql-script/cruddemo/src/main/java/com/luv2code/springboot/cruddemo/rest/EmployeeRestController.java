@@ -40,7 +40,7 @@ public class EmployeeRestController {
     }
 
 
-    // Add mapping for POST /employees - add a new employee, The whole URL will be http://localhost:8080/api/employees
+    // Add mapping for POST /employees - add a new employee, the whole URL will be http://localhost:8080/api/employees
     /*
     The post request will contain the employee object in JSON format :
     {"firstName" : "Hector","lastName": "Perez","email" : "hector@luv2code.com"}
@@ -56,6 +56,20 @@ public class EmployeeRestController {
         Employee dbEmployee = employeeService.save(theEmployee); // Call the DAO method to save the employee
 
         return dbEmployee; // Return the saved employee object
+    }
+
+
+    // Add mapping for PUT /employees - update an existing employee, the whole URL will be http://localhost:8080/api/employees/{employeeId}
+    /*
+    The PUT request will contain the employee object in JSON format :
+    {"id": 1,"firstName" : "Timothy","lastName": "Patterson","email" : "tim@luv2code.com"}
+    */
+    @PutMapping("/employees") // This annotation maps HTTP PUT requests to the update() method
+    public Employee updateEmployee(@RequestBody Employee theEmployee) { // @RequestBody - This annotation binds the HTTP request body ( JSON ) to the method parameter
+
+        Employee dbEmployee = employeeService.save(theEmployee); // Call the DAO method to save the employee
+
+        return dbEmployee; // Return the updated employee object
     }
 
 }
