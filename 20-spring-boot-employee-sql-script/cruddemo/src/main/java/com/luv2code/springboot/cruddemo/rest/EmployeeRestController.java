@@ -115,4 +115,19 @@ public class EmployeeRestController {
         return objectMapper.convertValue(employeeNode, Employee.class); // Convert the merged node back to an Employee object
     }
 
+
+    // Add mapping for DELETE /employees/{employeeId} - delete an employee, the whole URL will be http://localhost:8080/api/employees/{employeeId}
+    @DeleteMapping("/employees/{employeeId}") // This annotation maps HTTP DELETE requests to the delete() method
+    public String deleteEmployee(@PathVariable int employeeId) { // @PathVariable -  tells Spring to bind the URL path variable ( employeeId ) to the method parameter
+
+        Employee tempEmployee = employeeService.findById(employeeId); // Call the DAO method to get the employee by ID
+
+        if (tempEmployee == null) {
+            throw new RuntimeException("Employee id not found - " + employeeId); // If the employee is not found, throw an exception
+        }
+
+        employeeService.deleteById(employeeId); // Call the DAO method to delete the employee by ID
+
+        return "Deleted employee id - " + employeeId; // Return a success message
+    }
 }
